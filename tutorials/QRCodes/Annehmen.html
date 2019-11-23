@@ -1,46 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>QR Codes</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="main.css">
-    <style>
-        img{
-            width: 100%;
-        }
-        div img{
-            width: 50%;
-        }
-    </style>
-    <script src="qrcode.js"></script>
+ <title>Bitcoins annehmen</title>
 </head>
 <body>
-    <header>
-        <h1>QR Codes</h1>
-    </header>
-    <main>
-       <!-- using
-       https://davidshimjs.github.io/qrcodejs/
-       -->
-        <div id="output"></div>
-        <img src="qrcode-encoding.png" />
-    </main>    
-    <script>
-        let qrcode = new QRCode("output", {
-            text: "http://fillmurray.com/",
-            width: 177,
-            height: 177,
-            colorDark : "#990000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-        });
-        
-        document.body.addEventListener('click', ()=>{
-            qrcode.clear(); 
-            qrcode.makeCode("http://google.ca/"); 
-        })
-        
-    </script>
+    <script src="jquery.min.js"> </script>
+    <script src="qrcode.js"></script>
+
+    <input id="Adresse" placeholder="BTC Empfangsadresse"/>
+    <input id="Wechselkurs" placeholder="EUR pro Bitcoin"/>
+    <input id="Preis" placeholder="Preis"/>
+    <button id="Empfangen">Receive!</button>
+
+
+ <div id="qrcode" style="padding-top:100px;padding-bottom:100px;
+ padding-left:100px;padding-right:100px"> </div>
+ 
+
+<script type="text/javascript">
+
+
+$("#Empfangen").click(function()
+
+    {
+    Adresse=($("#Adresse").val())
+    Preis=($("#Preis").val())/($("#Wechselkurs").val())
+    console.log(Adresse)
+
+    new QRCode(document.getElementById("qrcode"),
+    "bitcoin:"+Adresse+"?amount="+Preis.toString());
+}//close function
+
+);//close click
+
+
+  </script>
+
 </body>
+
+
 </html>
