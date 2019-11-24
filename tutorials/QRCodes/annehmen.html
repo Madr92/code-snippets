@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Bitcoins annehmen</title>
+</head>
+<body>
+    <script src="jquery.min.js"> </script>
+    <script src="qrcode.js"></script>
+
+    <input id="Adresse" placeholder="BTC Empfangsadresse"/>
+    <input id="Wechselkurs" placeholder="EUR pro Bitcoin"/>
+    <input id="Preis" placeholder="Preis"/>
+    <button id="Empfangen">Receive!</button>
+
+
+ <div id="qrcode" style="padding-top:100px;padding-bottom:100px;
+ padding-left:100px;padding-right:100px"> </div>
+ 
+
+<script type="text/javascript">
+$("#Empfangen").click(function()
+    {
+    Adresse=($("#Adresse").val())
+    Preis=($("#Preis").val())/($("#Wechselkurs").val())
+    console.log(Adresse)
+    new QRCode(document.getElementById("qrcode"),
+    "bitcoin:"+Adresse+"?amount="+Preis.toString());
+}//close function
+);//close click
+  </script>
+
+</body>
+
+
+</html>
